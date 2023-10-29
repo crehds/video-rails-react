@@ -1,29 +1,8 @@
-import { useCallback, useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { API_URL } from '../../constants/api';
-import { Post } from '../../interface/post';
+import { Link } from 'react-router-dom';
+import useGeOnePost from '../../hooks/useGetOnePost';
 
 function PostDetails() {
-  const [post, setPost] = useState<Post | null>(null);
-  const { id } = useParams();
-
-  const fetchCurrentPost = useCallback(async () => {
-    try {
-      const response = await fetch(`${API_URL}/posts/${id}`);
-      if (response.ok) {
-        const data = await response.json();
-        setPost(data);
-      } else {
-        throw new Error('Something went wrong');
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }, [id]);
-
-  useEffect(() => {
-    fetchCurrentPost();
-  }, [fetchCurrentPost]);
+  const { post } = useGeOnePost();
 
   return (
     <div>
