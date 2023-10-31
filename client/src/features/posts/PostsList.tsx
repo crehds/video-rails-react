@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import useGetAllPosts from '../../hooks/useGetAllPosts';
 
 function PostsList() {
@@ -9,7 +10,10 @@ function PostsList() {
       {posts.map((post) => {
         return (
           <div key={post.id}>
-            <h2>{post.title}</h2>
+            <Link to={`/posts/${post.id}`}>
+              <h2>{post.title}</h2>
+            </Link>
+
             <p>{post.body}</p>
           </div>
         );
